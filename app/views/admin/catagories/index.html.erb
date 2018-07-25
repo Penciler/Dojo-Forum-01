@@ -1,0 +1,21 @@
+<h1> Admin Catagory index </h1>
+
+<% if current_user.role = 'admin' %>
+	<%= form_for [:admin, @catagory] do |f| %>
+		<div class="form-group">
+			<%= f.label :name, "Catagory name" %>
+			<%= f.text_field :name, class: "form-control" %>
+		</div>
+
+		<%= f.submit class: "actions btn btn-primary" %>
+	<% end %>
+<% end %>
+
+
+<% @catagories.each do |catagory| %>
+	<ul>
+		<li style="font-weight:bold"><%= catagory.name %></li>
+	</ul>
+	<%= link_to('Edit',edit_admin_catagory_path(catagory), class: "actions btn btn-primary", method: :get) %>
+	<%= link_to('Delete',admin_catagory_path(catagory), class: "actions btn btn-primary", method: :delete) %>	
+<% end %>
