@@ -3,7 +3,7 @@ before_action :authenticate_user!, :only =>:destroy
 before_action :authenticate_admin, :only =>:destroy	
 
 	def index
-		@posts=Post.all
+		@posts=Post.page(params[:page]).per(20)
 	end
 
 	def destroy
