@@ -2,8 +2,12 @@
 
 <%= link_to('Login',new_user_session_path, class: "actions btn btn-primary", method: :get) %>
 <%= link_to('Logout',destroy_user_session_path, class: "actions btn btn-primary", method: :delete) %>
-
-
+<br>
+<br>
+<%= link_to('Default ',posts_path, class: "actions btn btn-primary", method: :get) %>
+<%= link_to('Sort by last update',posts_path(:sort=>'update'), class: "actions btn btn-primary", method: :get) %>
+<%= link_to('Sort by maximum replies ',posts_path(:sort=>'replies'), class: "actions btn btn-primary", method: :get) %>
+<%= link_to('Sort by view counts ',posts_path(:sort=>'view'), class: "actions btn btn-primary", method: :get) %>
 <% @posts.each do |post| %>
 	<dl>
 		<dt style="font-weight:bold"><%= post.title %></dt>

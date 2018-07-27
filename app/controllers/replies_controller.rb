@@ -7,6 +7,8 @@ before_action :authenticate_admin_or_replier, only:[:destroy, :edit, :update]
 		@reply= @post.replies.build(reply_params)
 		@reply.user=current_user
 		@reply.save!
+		@post.reply_update_at=@reply.updated_at
+		@post.save!
 		redirect_to post_path(@post)
 	end
 

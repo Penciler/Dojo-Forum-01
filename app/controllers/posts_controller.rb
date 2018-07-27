@@ -3,7 +3,18 @@ before_action :authenticate_user!, only: [:destroy,:show]
 before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]	
 
 	def index
-		@posts=Post.page(params[:page]).per(20)
+		#@posts=Post.page(params[:page]).per(20)
+		sort=params[:sort]
+		case 
+		when sort=='update'
+			@posts=Post.all.order(reply_update_at: :desc).page(params[:page]).per(20)
+		when sort=='replies'
+			@posts=Post.all.order(replies_count: :desc).page(params[:page]).per(20)
+		when sort=='view'
+			@posts=Post.all.order(viewed_count: :desc).page(params[:page]).per(20)
+		else 
+			@posts=Post.page(params[:page]).per(20)
+		end
 	end
 
 	def show
