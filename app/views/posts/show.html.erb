@@ -1,0 +1,16 @@
+<h1>Post show page</h1>
+
+<ul>
+	<li><%='User: '%><%= @user.name %></li>
+	<li><%= 'Ttitle: '%><%= @post.title %></li>
+	<li><%= 'Content: '%><%= @post.content %></li>
+</ul>
+<br>
+<h2>Replies</h2>
+<br>
+<% @replies.each do |reply| %>
+	<ul>
+		<li><%='User: '%><%= reply.user.name %></li>
+		<li><%= 'Reply: '%><%= reply.content %></li>
+	</ul>	
+<% end %>

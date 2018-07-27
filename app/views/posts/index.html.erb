@@ -7,9 +7,9 @@
 <% @posts.each do |post| %>
 	<dl>
 		<dt style="font-weight:bold"><%= post.title %></dt>
-		<dd><%= post.content %></dd>
 		<dd><%="Replies: "%><%= post.replies_count %></dd>
 	</dl>
+    <%= link_to('View',post_path(post), class: "actions btn btn-primary", method: :get) %>
 	<% if current_user != nil && current_user.role=='admin' %>
 		<%= link_to('Delete',post_path(post), class: "actions btn btn-primary", method: :delete) %>
 	<%end%>
