@@ -8,6 +8,8 @@ before_action :authenticate_admin, :only =>:destroy
 
 	def show
 		@post=Post.find(params[:id])
+		@post.viewed_count+=1
+		@post.save
 		@user=User.find(@post.user_id)
 		@replies=@post.replies
 	end
