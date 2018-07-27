@@ -18,7 +18,11 @@
 	<ul>
 		<li><%='User: '%><%= reply.user.name %></li>
 		<li><%= 'Reply: '%><%= reply.content %></li>
-	</ul>	
+	</ul>
+	<% if current_user == reply.user %>
+		<%= link_to('Delete',post_reply_path(@post,reply), class: "actions btn btn-primary", method: :delete) %>
+		<%= link_to('Edit',edit_post_reply_path(@post, reply), class: "actions btn btn-primary", method: :get) %>
+	<%end%>	
 <% end %>
 
 <%= form_for [@post, @reply] do |f| %>

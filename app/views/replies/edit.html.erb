@@ -1,0 +1,10 @@
+<h1>Reply edit page </h1>
+
+<%= form_for [@post, @reply] do |f| %>
+	<div class="form-group">
+		<%= f.label :content, "Reply: " %>
+		<%= f.text_area :content, class: "form-control" %>
+	</div>
+
+	<%= f.submit class: "actions btn btn-primary" %>
+<%end%>

@@ -15,4 +15,13 @@ class ApplicationController < ActionController::Base
       redirect_to post_path(@post)
     end
   end
+
+  def authenticate_admin_or_replier
+  	@reply=Reply.find(params[:id])
+  	@post=Post.find(params[:post_id])
+    unless current_user.admin? || current_user.id==@reply.user_id
+      flash[:alert] = "Not allow!"
+      redirect_to post_path(@post)
+    end
+  end
 end
