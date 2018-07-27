@@ -11,7 +11,7 @@ before_action :authenticate_admin, :only =>:destroy
 		@post.viewed_count+=1
 		@post.save
 		@user=User.find(@post.user_id)
-		@replies=@post.replies
+		@replies=@post.replies.page(params[:page]).per(20)
 		@reply=Reply.new
 	end
 
