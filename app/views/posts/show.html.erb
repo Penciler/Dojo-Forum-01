@@ -5,6 +5,12 @@
 	<li><%= 'Ttitle: '%><%= @post.title %></li>
 	<li><%= 'Content: '%><%= @post.content %></li>
 </ul>
+
+<% if current_user == @user %>
+	<%= link_to('Delete',post_path(@post), class: "actions btn btn-primary", method: :delete) %>
+	<%= link_to('Edit',edit_post_path(@post), class: "actions btn btn-primary", method: :get) %>
+<%end%>
+
 <br>
 <h2>Replies</h2>
 <br>

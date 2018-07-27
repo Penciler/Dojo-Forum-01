@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def authenticate_admin_or_writer
+  	@post=Post.find(params[:id])
+    unless current_user.admin? || current_user.id==@post.user_id
+      flash[:alert] = "Not allow!"
+      redirect_to post_path(@post)
+    end
+  end
 end
