@@ -12,6 +12,7 @@ before_action :authenticate_admin, :only =>:destroy
 		@post.save
 		@user=User.find(@post.user_id)
 		@replies=@post.replies
+		@reply=Reply.new
 	end
 
 	def destroy

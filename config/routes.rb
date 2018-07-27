@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :posts
+  resources :posts do
+
+    resources :replies
+  end
 
   namespace :admin do
   	resources :users
