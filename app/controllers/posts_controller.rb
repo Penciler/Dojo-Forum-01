@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-before_action :authenticate_user!, only: [:destroy,:show]	
+before_action :authenticate_user!, only: [:destroy,:show, :new, :create]	
 before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]	
 
 	def index
@@ -15,6 +15,18 @@ before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]
 		else 
 			@posts=Post.page(params[:page]).per(20)
 		end
+	end
+
+	def new
+		@post=Post.new
+	end
+
+	def create
+		@user=current_user
+		@post=@user.posts.build(post_params)
+		@post.catagory_id=10
+		@post.save!
+		redirect_to post_path(@post)
 	end
 
 	def show
