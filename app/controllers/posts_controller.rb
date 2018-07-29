@@ -57,7 +57,7 @@ before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]
 private
 
 	def post_params
-		params.require(:post).permit( :title,:content, :created_at, :updated_at)
+		params.require(:post).permit(:image, :title,:content, :created_at, :updated_at)
 	end
 
 end
