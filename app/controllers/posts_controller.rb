@@ -5,15 +5,25 @@ before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]
 	def index
 		#@posts=Post.page(params[:page]).per(20)
 		sort=params[:sort]
+		catagory=params[:catagory]
+		@catagories=Catagory.all
+
+		if catagory != nil
+			@catagory=Catagory.find(catagory)
+			@post=@catagory.posts
+		else
+			@post=Post.all
+		end
+
 		case 
 		when sort=='update'
-			@posts=Post.all.order(reply_update_at: :desc).page(params[:page]).per(20)
+			@posts=@post.order(reply_update_at: :desc).page(params[:page]).per(20)
 		when sort=='replies'
-			@posts=Post.all.order(replies_count: :desc).page(params[:page]).per(20)
+			@posts=@post.order(replies_count: :desc).page(params[:page]).per(20)
 		when sort=='view'
-			@posts=Post.all.order(viewed_count: :desc).page(params[:page]).per(20)
+			@posts=@post.order(viewed_count: :desc).page(params[:page]).per(20)
 		else 
-			@posts=Post.page(params[:page]).per(20)
+			@posts=@post.page(params[:page]).per(20)
 		end
 	end
 

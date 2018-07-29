@@ -2,15 +2,30 @@
 
 
 <br>
+<h2>Sort posts</h2>
+<br> 
+<% current_catagory=params[:catagory] %>
 <%= link_to('Default ',posts_path, class: "actions btn btn-primary", method: :get) %>
-<%= link_to('Sort by last update',posts_path(:sort=>'update'), class: "actions btn btn-primary", method: :get) %>
-<%= link_to('Sort by maximum replies ',posts_path(:sort=>'replies'), class: "actions btn btn-primary", method: :get) %>
-<%= link_to('Sort by view counts ',posts_path(:sort=>'view'), class: "actions btn btn-primary", method: :get) %>
+<%= link_to('Sort by last update',posts_path(:sort=>'update', :catagory=>current_catagory), class: "actions btn btn-primary", method: :get) %>
+<%= link_to('Sort by maximum replies ',posts_path(:sort=>'replies', :catagory=>current_catagory), class: "actions btn btn-primary", method: :get) %>
+<%= link_to('Sort by view counts ',posts_path(:sort=>'view', :catagory=>current_catagory), class: "actions btn btn-primary", method: :get) %>
+
+<br>
+<br>
+<h2>Catagories</h2>
+<br>
+<% @catagories.each do |catagory| %>
+	<%= link_to(catagory.name ,posts_path(:catagory=>catagory.id), class: "actions btn btn-primary", method: :get) %>
+<%end%>
+
+<br>
+<br>
 <% @posts.each do |post| %>
 	<dl>
 		<dt style="font-weight:bold"><%= post.title %></dt>
 		<dd><%="Replies: "%><%= post.replies_count %></dd>
 		<dd><%="Viewed count: "%><%= post.viewed_count %></dd>
+		<dd><%="Catagory: "%><%= post.catagory.name %></dd>
 	</dl>
     <%= link_to('View',post_path(post), class: "actions btn btn-primary", method: :get) %>
 	<% if current_user != nil && current_user.role=='admin' %>
