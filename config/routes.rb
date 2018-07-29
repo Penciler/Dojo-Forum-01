@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :replies
   end
 
+  resources :users, only:[:show]
+
   namespace :admin do
   	resources :users
   	resources :posts
