@@ -24,7 +24,7 @@ before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]
 	def create
 		@user=current_user
 		@post=@user.posts.build(post_params)
-		@post.catagory_id=10
+		#@post.catagory_id=10
 		@post.save!
 		redirect_to post_path(@post)
 	end
@@ -57,7 +57,7 @@ before_action :authenticate_admin_or_writer, only:[:destroy, :edit, :update]
 private
 
 	def post_params
-		params.require(:post).permit(:image, :title,:content, :created_at, :updated_at)
+		params.require(:post).permit(:catagory_id, :image, :title,:content, :created_at, :updated_at)
 	end
 
 end

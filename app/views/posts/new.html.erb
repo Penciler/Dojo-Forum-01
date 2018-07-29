@@ -12,6 +12,11 @@
 	</div>
 
 	<div class="form-group">
+		<%= f.label :catagory_id, "Catagory: " %>
+		<%= f.collection_select :catagory_id, Catagory.all, :id, :name, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
 		<%= f.label :image, "Photo: " %>
 		<%= image_tag @post.image, width: '300px' if @post.image? %>
 		<%= f.file_field :image %>
