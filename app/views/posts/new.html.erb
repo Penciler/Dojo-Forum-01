@@ -1,26 +1,3 @@
 <h1>New post page</h1>
 
-<%= form_for [@post] do |f| %>
-	<div class="form-group">
-		<%= f.label :title, "Title: " %>
-		<%= f.text_field :title, class: "form-control" %>
-	</div>
-
-	<div class="form-group">
-		<%= f.label :content, "Content: " %>
-		<%= f.text_area :content, class: "form-control" %>
-	</div>
-
-	<div class="form-group">
-		<%= f.label :catagory_id, "Catagory: " %>
-		<%= f.collection_select :catagory_id, Catagory.all, :id, :name, class: "form-control" %>
-	</div>
-
-	<div class="form-group">
-		<%= f.label :image, "Photo: " %>
-		<%= image_tag @post.image, width: '300px' if @post.image? %>
-		<%= f.file_field :image %>
-	</div>
-
-	<%= f.submit class: "actions btn btn-primary" %>
-<%end%>
+<%= render "shared/form_post" %>
