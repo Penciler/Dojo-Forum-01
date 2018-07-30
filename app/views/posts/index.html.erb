@@ -1,19 +1,8 @@
-<h1>Post index</h1>
-
-
-<br>
-<h2>Sort posts</h2>
-<br> 
+<h1>Dojo Forum</h1>
+ 
 <% current_catagory=params[:catagory] %>
-<%= link_to('Default ',posts_path, class: "actions btn btn-primary", method: :get) %>
-<%= link_to('Sort by last update',posts_path(:sort=>'update', :catagory=>current_catagory), class: "actions btn btn-primary", method: :get) %>
-<%= link_to('Sort by maximum replies ',posts_path(:sort=>'replies', :catagory=>current_catagory), class: "actions btn btn-primary", method: :get) %>
-<%= link_to('Sort by view counts ',posts_path(:sort=>'view', :catagory=>current_catagory), class: "actions btn btn-primary", method: :get) %>
-
 <br>
-<br>
-<h2>Catagories</h2>
-<br>
+<%= link_to('All' ,posts_path, class: "actions btn btn-primary", method: :get) %>
 <% @catagories.each do |catagory| %>
 	<%= link_to(catagory.name ,posts_path(:catagory=>catagory.id), class: "actions btn btn-primary", method: :get) %>
 <%end%>
@@ -23,24 +12,22 @@
 
 <table>
 	<tr>
-		<th>Replies count</th>
-		<th> Title</th>
-		<th> Last replied at</th>
-		<th> Viewed count</th>
-		<th> View</th>
-		<th> Delete</th>
+		<th><%= link_to 'Replies count',posts_path(:sort=>'replies', :catagory=>current_catagory)%></th>
+		<th>Title</th>
+		<th><%=link_to 'Last replied at', posts_path(:sort=>'update', :catagory=>current_catagory)%></th>
+		<th><%=link_to 'Viewed count', posts_path(:sort=>'view', :catagory=>current_catagory)%></th>
+		<% if current_user != nil && current_user.role=='admin' %>
+			<th>Delete</td>
+		<%end%>
 	</tr>
 <% @posts.each do |post| %>
 	<tr>
 		<td><%= post.replies_count %></td>
-		<td style="font-weight:bold"><%= post.title %></td>
+		<td style="font-weight:bold"><%=link_to post.title, post_path(post) %></td>
 		<td><%= post.reply_update_at %></td>
 		<td><%= post.viewed_count %></td>
-		<td><%= link_to('View',post_path(post), class: "actions btn btn-primary", method: :get) %></td>
 		<% if current_user != nil && current_user.role=='admin' %>
 			<td><%= link_to('Delete',post_path(post), class: "actions btn btn-primary", method: :delete) %></td>
-		<% else%>
-			<td>Not allowed</td>
 		<%end%>
 
 	</tr>
