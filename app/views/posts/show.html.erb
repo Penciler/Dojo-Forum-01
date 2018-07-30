@@ -1,22 +1,31 @@
-<h1>Post show page</h1>
+<h1><%=@post.title%></h1>
 
-<ul>
-	<li><%='User: '%><%= @user.name %><%= link_to('Profile', user_path(@user), class: "actions btn btn-primary", method: :get) %></li>
-	<li><%= 'Ttitle: '%><%= @post.title %></li>
-	<li><%= 'Content: '%><%= @post.content %></li>
-	<li><%= 'Catagory: '%><%= @post.catagory.name %></li>
-	<li><%= 'Photo: '%><%= image_tag @post.image, width: '600px' %></li>
-</ul>
-
-<% if current_user == @user %>
-	<%= link_to('Delete',post_path(@post), class: "actions btn btn-primary", method: :delete) %>
-	<%= link_to('Edit',edit_post_path(@post), class: "actions btn btn-primary", method: :get) %>
-<%end%>
-
-<br>
-<h2>Replies</h2>
-<br>
-<%= render "shared/form_reply_list" %>
+<table>
+	<tr>
+	<th><%= @user.name %></th>
+	<th>
+		<%= @post.content %>
+		<br>
+		<% if current_user == @user %>
+			<%= link_to('Delete',post_path(@post), class: "actions btn btn-primary", method: :delete) %>
+			<%= link_to('Edit',edit_post_path(@post), class: "actions btn btn-primary", method: :get) %>
+		<%end%>
+	</th>
+    </tr>
+	<% @replies.each do |reply| %>
+		<tr>
+			<td><%= reply.user.name %></td>
+			<td>
+				<%= reply.content %>
+				<br>
+				<% if current_user == reply.user %>
+					<%= link_to('Delete',post_reply_path(@post,reply), class: "actions btn btn-primary", method: :delete) %>
+				<%= link_to('Edit',edit_post_reply_path(@post, reply), class: "actions btn btn-primary", method: :get) %>
+				<%end%>					
+			</td>
+		</tr>
+	<% end %>
+</table>
 
 <%= render "shared/form_reply" %>
 
