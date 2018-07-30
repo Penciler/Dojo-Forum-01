@@ -1,23 +1,46 @@
-<h1>User show page</h1>
+    <div class="col-sm-4"> 
+		<%= @user.avatar %>
+		<%= @user.name %>
+    </div>
+    <div class="col-sm-8"> 
+		<%= @user.description %>
+    </div>
+    <br>
+    <br>
 
-<ul>
-	<li><%= @user.avatar %></li>
-	<li><%= 'Name: ' %><%= @user.name %></li>
-	<li><%= 'Description: ' %><%= @user.description %></li>
-</ul>
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" onclick="openList(event, 'My Post')" id="defaultOpen">My Post</button>
+  <button class="tablinks" onclick="openList(event, 'My Comment')">My Comment</button>
+</div>
 
-<h2>Posts</h2>
+<!-- Tab content -->
+<div id="My Post" class="tabcontent">
+	<table>
+	<% @posts.each do |post| %>
+			<tr>
+				<td><%=post.title %></td>
+				<td><%=post.updated_at %></td>
+			</tr>
+	<%end%>
+	</table>
+</div>
 
-<% @posts.each do |post| %>
-	<ul>
-		<li><%=post.title %></li>
-	</ul>
-<%end%>
+<div id="My Comment" class="tabcontent">
+	<table>
+	<% @replies.each do |reply| %>
+		<tr>
+			<td>
+				<h5 style="font-weight:bold"><%= Post.find(reply.post_id).title %></h5>
+				<br>
+				<%= reply.content %>
+			</td>
+		</tr>
+	<% end %>
+	</table>
+</div>
 
-<h2>Replied posts</h2>
-
-<% @replies.each do |reply| %>
-	<ul>
-		<li><%= Post.find(reply.post_id).title %></li>
-	</ul>
-<% end %>
+<script>
+// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+</script>

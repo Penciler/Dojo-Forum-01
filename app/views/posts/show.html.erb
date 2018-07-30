@@ -2,7 +2,7 @@
 
 <table>
 	<tr>
-	<th><%= @user.name %></th>
+	<th><%= link_to @user.name, user_path(@user) %></th>
 	<th>
 		<%= @post.content %>
 		<br>
