@@ -20,18 +20,32 @@
 
 <br>
 <br>
-<% @posts.each do |post| %>
-	<dl>
-		<dt style="font-weight:bold"><%= post.title %></dt>
-		<dd><%="Replies: "%><%= post.replies_count %></dd>
-		<dd><%="Viewed count: "%><%= post.viewed_count %></dd>
-		<dd><%="Catagory: "%><%= post.catagory.name %></dd>
-	</dl>
-    <%= link_to('View',post_path(post), class: "actions btn btn-primary", method: :get) %>
-	<% if current_user != nil && current_user.role=='admin' %>
-		<%= link_to('Delete',post_path(post), class: "actions btn btn-primary", method: :delete) %>
-	<%end%>
 
+<table>
+	<tr>
+		<th>Replies count</th>
+		<th> Title</th>
+		<th> Last replied at</th>
+		<th> Viewed count</th>
+		<th> View</th>
+		<th> Delete</th>
+	</tr>
+<% @posts.each do |post| %>
+	<tr>
+		<td><%= post.replies_count %></td>
+		<td style="font-weight:bold"><%= post.title %></td>
+		<td><%= post.reply_update_at %></td>
+		<td><%= post.viewed_count %></td>
+		<td><%= link_to('View',post_path(post), class: "actions btn btn-primary", method: :get) %></td>
+		<% if current_user != nil && current_user.role=='admin' %>
+			<td><%= link_to('Delete',post_path(post), class: "actions btn btn-primary", method: :delete) %></td>
+		<% else%>
+			<td>Not allowed</td>
+		<%end%>
+
+	</tr>
 <% end %>
+</table>
+
 
 <%= paginate @posts %>
