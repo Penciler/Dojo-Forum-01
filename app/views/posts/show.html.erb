@@ -2,8 +2,14 @@
 
 <table>
 	<tr>
-	<th><%= link_to @user.name, user_path(@user) %></th>
 	<th>
+		<div style='height:100px; width:100px;'><%=image_tag @user.avatar,class: "img-responsive center-block" %></div>
+		<br>
+		<%= link_to @user.name, user_path(@user) %>			
+	</th>
+	<th>
+		<div style='height:300px; width:300px;'><%=image_tag @post.image, class: "img-responsive center-block"%></div>
+		<br>
 		<%= @post.content %>
 		<br>
 		<% if current_user == @user %>

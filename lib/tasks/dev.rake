@@ -16,6 +16,8 @@ namespace :dev do
         name:  FFaker::Name.first_name,
         email: FFaker::Internet.unique.email,      
         password: '12345678',
+        description: FFaker::Lorem.paragraphs,
+        avatar: FFaker::Avatar.image
       )
     end
     puts 'have created fake users'
@@ -40,7 +42,8 @@ namespace :dev do
         title:  FFaker::Lorem.phrase,
         content: FFaker::Lorem.paragraphs,
         user_id: User.all.sample.id,
-        catagory_id: Catagory.all.sample.id
+        catagory_id: Catagory.all.sample.id,
+        image: FFaker::Avatar.image
       )
     end
 

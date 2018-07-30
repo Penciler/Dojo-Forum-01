@@ -1,9 +1,11 @@
     <div class="col-sm-4"> 
-		<%= @user.avatar %>
+		<div style='height:100px; width:100px;'><%=image_tag @user.avatar,class: "img-responsive center-block" %></div>
 		<%= @user.name %>
     </div>
-    <div class="col-sm-8"> 
+    <div class="col-sm-8">
+    	<div style='height:200px;'> 
 		<%= @user.description %>
+		</div>
     </div>
     <br>
     <br>
